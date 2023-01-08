@@ -109,14 +109,20 @@ function calculate_temp_range(; n_spins, temp0, tempinc, max_iter)
     return rows
 end
 
-# Parameters for final calculation. Can be re-defined in a later cell
-MAX_SPINS_CHAIN = 13;
+# Parameters for final calculation
+MAX_SPINS_CHAIN = 4;
 TEMP0 = 2.0;
 TEMP_INC = 0.025;
 MAX_ITER = 40;
 
-@time temp_range = calculate_temp_range(n_spins=MAX_SPINS_CHAIN, temp0=TEMP0, tempinc=TEMP_INC, max_iter=MAX_ITER)
+try
+    mkdir("corr-len-output")
+    println("Created directory corr-len-output")
+catch e
+    println("Directory corr-len-output already exists...Proceding")
+end
 
+@time temp_range = calculate_temp_range(n_spins=MAX_SPINS_CHAIN, temp0=TEMP0, tempinc=TEMP_INC, max_iter=MAX_ITER)
 CSV.write("corr-len-output/corl-tmp-long_N$(MAX_SPINS_CHAIN)_T0$(TEMP0)_INC$(TEMP_INC).dat", temp_range, delim="\t")
 
 p = plot(dpi=600)
