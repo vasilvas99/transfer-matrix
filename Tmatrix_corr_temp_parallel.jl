@@ -110,7 +110,7 @@ function calculate_temp_range(; n_spins, temp0, tempinc, max_iter)
 end
 
 # Parameters for final calculation
-MAX_SPINS_CHAIN = 4;
+MAX_SPINS_CHAIN = 15;
 TEMP0 = 2.0;
 TEMP_INC = 0.025;
 MAX_ITER = 40;
