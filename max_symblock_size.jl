@@ -107,6 +107,16 @@ function parse_commandline()
     return parse_args(s)
 end
 
+@everywhere function count_nonzero(num_vecs_class)
+    count = 0
+    for i in 0:length(num_vecs_class)-1
+        if num_vecs_class[i] > 0
+            count += 1
+        end
+    end
+    return count
+end
+
 function init_output_dir(dir_name)
     try
         mkdir(dir_name)
@@ -128,12 +138,12 @@ function main()
 
     p = plot(dpi=600)
     xlabel!(p, "Translation step")
-    ylabel!(p, "Largest class size")
+    ylabel!(p, L"log_{2} (n_{classes})")
     println("Initialization done, starting calculations")
     for spins in range(START, stop=STOP, step=STEP)
         print("Running with $(spins) spins...")
         time_taken = @elapsed begin
-            max_sizes = pmap((tr_step) -> maximum(classify(spins, tr_step)[2]), 1:spins)
+            max_sizes = pmap((tr_step) -> log2(count_nonzero(classify(spins, tr_step)[2])), 1:spins)
             plot_legend=latexstring("\$n_{spins} = $(spins)\$")
             plot!(p, 1:spins, max_sizes, label=plot_legend)
         end
