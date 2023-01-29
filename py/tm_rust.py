@@ -9,12 +9,12 @@ def corr_len(n_spins, temp):
     cln = 1.0 / (np.log(eig_val[0] / abs(eig_val[1])))
     return cln
 
-N_MIN = 8
-N_MAX = 8
+N_MIN = 16
+N_MAX = 16
 
 T_MIN = 2.0
 T_MAX = 2.8
-T_MAX_ITER= 200
+T_MAX_ITER= 350
 
 t_step = (T_MAX-T_MIN)/T_MAX_ITER
 
