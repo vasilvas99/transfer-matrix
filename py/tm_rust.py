@@ -37,7 +37,7 @@ T_MAX = parser.T_MAX
 deltaT = (T_MAX-T_MIN)/(parser.ARRAY_MAX+1)
 
 T_MIN = T_MIN + deltaT*parser.ARRAY_POS
-T_MAX = T_MIN + deltaT*(parser.ARRAY_POS+1)
+T_MAX = T_MIN + deltaT
 
 T_MAX_ITER = parser.T_MAX_ITER
 T_MAX_ITER = math.ceil(T_MAX_ITER/(parser.ARRAY_MAX+1))
